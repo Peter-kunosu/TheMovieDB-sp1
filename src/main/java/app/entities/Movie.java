@@ -1,5 +1,6 @@
 package app.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -19,6 +20,7 @@ public class Movie {
 
     private String title;
     private String original_language;
+    @Column(columnDefinition = "TEXT")
     private String overview;
     private String release_date;
     private String media_type;
