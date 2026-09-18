@@ -10,7 +10,7 @@ public class MovieService {
     private static String apiKey = System.getenv("api_key");
 
     //API URLS
-    private static final String URLFINDBYID = "https://api.themoviedb.org/3/find/$";
+    private static final String URLFINDBYID = "https://api.themoviedb.org/3/find/$?external_source=imdb_id&api_key=";
 
     //APIREADER INSTANCE
     private static APIReader apiReader = new APIReader();
@@ -19,7 +19,7 @@ public class MovieService {
     public static Movie createMovie(String movieId) {
         String url = URLFINDBYID;
 
-        String specificUrl = url.replace("$", movieId);
+        String specificUrl = url.replace("$", movieId) + apiKey;
 
         SearchResultDTO result = apiReader.getWithJackson(specificUrl, SearchResultDTO.class);
 

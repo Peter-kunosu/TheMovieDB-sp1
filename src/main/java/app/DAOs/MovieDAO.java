@@ -1,5 +1,6 @@
 package app.DAOs;
 
+import app.config.HibernateConfig;
 import app.entities.Movie;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -9,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MovieDAO implements IDAO<Movie> {
-    private static EntityManagerFactory emf;
+    private static final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
 
     @Override
     public Movie create(Movie movie) {
