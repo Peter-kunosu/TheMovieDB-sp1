@@ -6,8 +6,10 @@ import app.service.MovieService;
 public class Main {
     public static void main(String[] args) {
 
-        Movie movie = MovieService.createMovie("tt17663992");
+        /*Movie movie = MovieService.createMovie("tt17663992");
         System.out.println("filmen blev gemt");
-        System.out.println(movie);
+        System.out.println(movie);*/
+
+        MovieService.importMovies(1000);
     }
 }

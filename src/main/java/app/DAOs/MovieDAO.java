@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MovieDAO implements IDAO<Movie> {
@@ -19,6 +20,24 @@ public class MovieDAO implements IDAO<Movie> {
             em.persist(movie);
             em.getTransaction().commit();
             return movie;
+        }
+    }
+
+    public List<Movie> createBatch(List<Movie> movies) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            for (int i = 0; i <= movies.size(); i++) {
+                em.persist(movies.get(i));
+
+                if ((i + 1) % 50 == 0) {
+                    em.flush();
+                    em.clear();
+                }
+            }
+
+            em.getTransaction().commit();
+            return movies;
         }
     }
 
