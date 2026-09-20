@@ -59,7 +59,7 @@ public class MovieDAO implements IDAO<Movie> {
     }
 
     @Override
-    public Movie getByID(Long id) {
+    public Movie getByID(Integer id) {
         try (EntityManager em = emf.createEntityManager()) {
 
             return em.find(Movie.class, id);
