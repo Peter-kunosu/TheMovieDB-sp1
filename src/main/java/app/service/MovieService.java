@@ -5,9 +5,12 @@ import app.DTOs.MovieDTO;
 import app.DTOs.SearchResultDTO;
 import app.entities.Movie;
 import app.DAOs.MovieDAO;
+import app.utils.Genres;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MovieService {
     // API KEY
@@ -60,12 +63,34 @@ public class MovieService {
     }
 
     public static void importMovies(int amount) {
-
         List<Movie> movies = fetchMovies(amount);
 
         movieDAO.createBatch(movies);
 
         System.out.println(movies.size() + " movies imported to database");
+    }
+
+    public static void printMoviesByGenre(String genreName) {
+        // Finder genre ud fra variablen
+        Integer genreId = Genres.MOVIE_GENRES.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().equalsIgnoreCase(genreName))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
+
+        if (genreId == null) {
+            System.out.println("Genre findes ikke: " + genreName);
+            return;
+        }
+
+        // Henter film fra databasen med sat genre
+        Set<Movie> movies = movieDAO.get();
+
+        // finder filmene og printer dem
+        movies.stream()
+                .filter(movie -> movie.getGenre_ids().contains(genreId))
+                .forEach(movie -> System.out.println(movie.getTitle()));
     }
 
 
