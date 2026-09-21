@@ -10,7 +10,9 @@ public class Main {
         System.out.println("filmen blev gemt");
         System.out.println(movie);*/
 
-        MovieService.importMovies(1000);
+        MovieService.importMovies(6);
+
+        MovieService.addCreditsToAllMovies();
 
         MovieService.printMoviesByGenre("Horror");
 

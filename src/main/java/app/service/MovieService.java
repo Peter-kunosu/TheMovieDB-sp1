@@ -170,4 +170,14 @@ public class MovieService {
 
         movieDAO.update(movie);
     }
+
+    public static void addCreditsToAllMovies() {
+        Set<Movie> movies = movieDAO.get();
+
+        for (Movie movie : movies) {
+            addCreditsToMovie(movie);
+        }
+
+        System.out.println("Credits added to all movies");
+    }
 }
