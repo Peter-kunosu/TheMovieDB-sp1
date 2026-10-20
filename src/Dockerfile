@@ -1,14 +1,10 @@
-# Start with Amazon Corretto 17 Alpine base image
-FROM amazoncorretto:17-alpine
 
-# Install curl on Alpine
-RUN apk update && apk add --no-cache curl
+FROM eclipse-temurin:25-jre
 
-# Copy the jar file into the image
+WORKDIR /app
+
 COPY target/app.jar /app.jar
 
-# Expose the port your app runs on
 EXPOSE 7070
 
-# Command to run your app
 CMD ["java", "-jar", "/app.jar"]
